@@ -1,0 +1,45 @@
+{% extends "auth/layout.html" %}
+{% block body %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Warning!! </strong>Every Change You Make will be reset to Default.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<form method="POST" class="row g-3 text">
+    {{ form.hidden_tag() }}
+    <div class="row g-2">
+        <div class="col-md">
+            <div class="form-floating">
+                {{form.username(class="form-control", id="floatingInputGrid")}}
+                {{form.username.label(class="floatingInputGrid")}}
+            </div>
+            {% for error in form.username.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div class="col-md">
+            <div class="form-floating">
+                {{form.password(class="form-control", id="floatingInputGrid")}}
+                {{form.password.label(class="floatingInputGrid")}}
+            </div>    
+            {% for error in form.password.errors %}
+            <span style="color: red;">  {{ error }}</span>
+            {% endfor %}
+            </div>
+            <div>
+                <a href="{{url_for('auth.reset_request')}}"> Forget Your Password? </a>
+            </div>
+        </div>
+        <div class="d-grid gap-2 d-md-block">
+            <div class="checkbox mb-3">
+                <label>
+                    {{form.remember_me}} {{form.remember_me.label}}
+                </label>
+            </div>
+            
+        </div>
+        <div class="d-grid gap-2 d-md-block">
+            {{form.submit(class="btn btn-outline-success")}}
+        </div>
+    </div>
+</form>
+{% endblock body %}

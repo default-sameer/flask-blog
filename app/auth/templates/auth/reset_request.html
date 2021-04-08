@@ -1,0 +1,33 @@
+{% extends "auth/layout.html" %}
+{% block body %}
+<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+    <div class="row align-items-center g-5 py-5">
+        <div class="col-lg-7 text-center text-lg-start">
+            <h1 class="display-4 fw-bold lh-1 mb-3">Reset Your Password</h1>
+            <p class="col-lg-10 fs-4">Don't Worry it Happens Sometime!</p>
+        </div>
+        <div class="col-10 mx-auto col-lg-5">
+            <form method="POST" class="p-5 border rounded-3 bg-light">
+                {{ form.hidden_tag() }}
+                <div class="form-floating mb-3">
+                    {% if form.email.errors %}
+                    {{form.email(class="form-control is-invalid", id="floatingInputInvalid")}}
+                    {{form.email.label(class="floatingInputInvalid")}}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{form.email(class="form-control", id="floatingInput")}}
+                    {{form.email.label(class="floatingInput")}}
+                    {% endif %}
+                </div>
+                {{form.submit(class="w-100 btn btn-lg btn-primary")}}
+                <hr class="my-4">
+                <small class="text-muted">After Clicking Reset Check Your Registered Email</small>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock body%}

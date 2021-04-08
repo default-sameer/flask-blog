@@ -1,0 +1,48 @@
+{% extends "post/layout.html" %}
+{% block body %}
+<div class="nav-scroller py-1 mb-2">
+    <nav class="nav d-flex justify-content-between">
+        <button type="button" class="btn btn-outline-secondary" onclick="goBack()">Back</button>
+        <div>
+        {% if post.author == current_user %}
+            <a class="btn btn-outline-success" href="{{url_for('post.update_post', post_id=post.id)}}">Update</a>
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop">Delete</button>
+        {% endif %}
+        </div>
+    </nav>
+</div>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+    <div class="col-md-12">
+        <article class="blog-post">
+            <h2 class="blog-post-title">{{post.head}}</h2>
+            <p class="blog-post-meta">{{moment(post.timestamp).fromNow()}} by <a href="{{url_for('post.user_post', username=post.author.username)}}">{{post.author.username}}</a></p>
+            <hr>
+            <p class="lead">{{post.body|safe}}</p>
+        </article>
+    </div>
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Delete Post?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are You Sure You Want To Delete Your Post?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <form action="{{url_for('post.delete_post', post_id=post.id)}}" method="POST">
+                        <input type="submit" class="btn btn-danger" value="Delete">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

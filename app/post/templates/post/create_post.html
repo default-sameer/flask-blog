@@ -1,0 +1,51 @@
+{% extends "post/layout.html" %}
+{% block body %}
+<form action="" method="POST" >
+    {{ form.hidden_tag() }}
+<div class="form-floating mb-3">
+    {% if form.head.errors %}
+    {{form.head(class="form-control is-invalid", id="floatingInputInvalid")}}
+    {{form.head.label(class="floatingInputInvalid")}}
+    <div class="invalid-feedback">
+        {% for error in form.head.errors %}
+            <span>{{ error }}</span>
+        {% endfor %}
+    </div>
+    {% else %}
+    {{form.head(class="form-control", id="floatingInput")}}
+    {{form.head.label(class="floatingInput")}}
+    {% endif %}
+</div>
+<div class="form-floating mb-3 ">
+    {% if form.sub_head.errors %}
+    {{form.sub_head(class="form-control is-invalid", id="floatingInputInvalid")}}
+    {{form.sub_head.label(class="floatingInputInvalid")}}
+    <div class="invalid-feedback">
+        {% for error in form.sub_head.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+    </div>
+    {% else %}
+    {{form.sub_head(class="form-control", id="floatingInput")}}
+    {{form.sub_head.label(class="floatingInput")}}
+    {% endif %}
+</div>
+<div class="form-floating">
+    {% if form.body.errors %}
+    {{form.body(class="form-control is-invalid", id="editor", style="height: 350px")}}
+    <div class="invalid-feedback">
+        {% for error in form.body.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+    </div>
+    {% else %}
+    {{form.body(class="form-control", id="editor", style="height: 350px")}}
+    {% endif %}
+</div>
+<hr>
+<div class="d-grid gap-2 col-3 mx-auto">
+    {{form.submit(class="btn btn-outline-success")}}
+</div>
+<hr>
+</form>
+{% endblock body %}

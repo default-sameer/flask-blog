@@ -1,0 +1,26 @@
+{% extends "admin/layout.html" %}
+{% block body %}
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mb-0">Users</h6>
+    {% for user in user %}
+    <div class="d-flex text-muted pt-3">
+        <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
+             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        </svg>
+
+        <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+            <div class="d-flex justify-content-between">
+                <strong class="text-gray-dark">{{user.username}}</strong>
+                <a href="{{url_for('admin.user_settings', username=user.username)}}">Settings</a>
+            </div>
+            <span class="d-block"><mark>Email</mark> : {{user.email}}</span>
+            <span class="d-block"><mark>Laste Seen</mark> : {{ moment(user.last_seen).fromNow() }}</span>
+            <span class="d-block"><mark>Joined</mark>: {{ moment(user.joined).format('LL') }}</span>
+        </div>
+    </div>
+    {% endfor %}
+    <small class="d-block text-end mt-3">
+        <a href="#">All suggestions</a>
+    </small>
+</div>
+{% endblock body %}

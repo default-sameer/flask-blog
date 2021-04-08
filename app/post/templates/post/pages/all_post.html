@@ -1,0 +1,60 @@
+{% extends "post/layout.html" %}
+{% block body %}
+<div class="nav-scroller py-1 mb-2">
+    <nav class="nav d-flex justify-content-between">
+        <button type="button" class="btn btn-outline-secondary" onclick="goBack()">Back</button>
+    </nav>
+</div>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+{% if posts.items %}
+{% for post in posts.items %}
+<div class="card feed-card shadow-sm border-0 mb-3">
+    <div class="card-body">
+        <div class="clearfix mb-2">
+            <div class="float-left">
+                <small class="font-weight-bold">By <a class="text-primary" href="{{url_for('post.user_post', username=post.author.username)}}">{{post.author.username}}</a></small>
+                <small>·</small>
+                <small class="text-muted" data-toggle="tooltip" data-placement="bottom">{{moment(post.timestamp).fromNow()}}</small>
+                <small class="text-muted">in</small>
+                <small class="font-weight-bold"><a href="#">Flask</a></small>
+            </div>
+        </div>
+        <div class="mb-1">
+            <a class="text-dark mt-0" href="{{url_for('post.post', post_id=post.id)}}">
+                <h5 class="mt-0 mb-0">{{post.head}}</h5>
+            </a>
+        </div>
+        <p class="text-truncate mb-2" style="font-size: 90%">{{post.sub_head}}</p>
+        <div class="tags mb-0">
+            <div class="blog-tags">
+                <a href="/tags/python" class="badge badge-tag" style="border-radius: 2px; color: black;">python</a>
+                <a href="/tags/flask" class="badge badge-tag" style="border-radius: 2px; color: black;">flask</a>
+                <a href="/articles" class="badge badge-content-type"
+                    style="border-radius: 2px; color: black;">Article</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<hr>
+{% else %}
+<div class="alert alert-primary" role="alert">
+    No Post To Show!   <a href="{{url_for('post.create_post', username=current_user.username)}}" class="alert-link">Create Your First Post</a>
+</div>
+{% endif %}
+<nav class="my-4" aria-label="...">
+    <ul class="pagination pagination-circle justify-content-center">
+        <!-- <li class="page-item">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+        </li> -->
+        {% include 'includes/_pagination.html' %}
+        <!-- <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+        </li> -->
+    </ul>
+</nav>
+{% endblock body %}

@@ -1,0 +1,54 @@
+{% extends "public/layout.html" %}
+{% block body %}
+
+
+
+<div class="container marketing">
+    
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">Using <span class="text-muted">Bootstrap Framework.</span></h2>
+            <p class="lead">This Blog uses Bootstrap.</p>
+        </div>
+        <div class="col-md-5">
+            <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="800" height="800"
+                xmlns="http://www.w3.org/2000/svg" role="img">
+                <title>Bootstrap</title>
+                <image href="{{url_for('static', filename='img/bootstrap.png')}}" />
+            </svg>
+        </div>
+    </div>
+    <hr class="featurette-divider">
+    <div class="row featurette">
+        <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading">Custom View Decorators. <span class="text-muted">See for yourself.</span>
+            </h2>
+            <p class="lead">Custom View Decorators is used to protect views from unwanted viewers.</p>
+        </div>
+        <div class="col-md-5 order-md-1">
+            <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="800" height="800"
+                xmlns="http://www.w3.org/2000/svg" role="img">
+                <title>View Decorators</title>
+                <image href="{{url_for('static', filename='img/view.png')}}" />
+            </svg>  
+        </div>
+    </div>
+    <hr class="featurette-divider">
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">Markdown Support using <span class="text-muted">Flask-CKEditor</span></h2>
+            <p class="lead">Flask-CKEditor is used for markdown of blog post.</p>
+        </div>
+        <div class="col-md-5">
+            <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="800"
+                height="800" xmlns="http://www.w3.org/2000/svg" role="img">
+                <title>Flask Flask-CKEditor</title>
+                <image href="{{url_for('static', filename='img/flask-ckeditor.png')}}" />
+            </svg>
+    
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+</div>
+{% endblock body %}

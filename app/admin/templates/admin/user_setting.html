@@ -1,0 +1,82 @@
+{% extends "admin/layout.html" %}
+{% block body %}
+<nav class="blog-pagination" aria-label="Pagination">
+    <a class="btn btn-outline-primary" href="{{url_for('admin.users')}}">Back</a>
+</nav>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="form-floating mb-3">
+        {% if form.username.errors %}
+        {{form.username(class="form-control is-invalid", id="floatingInputInvalid")}}
+        {{form.username.label(class="floatingInputInvalid")}}
+        <div class="invalid-feedback">
+            {% for error in form.username.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{form.username(class="form-control", id="floatingInput")}}
+        {{form.username.label(class="floatingInput")}}
+        {% endif %}
+    </div>
+    <div class="form-floating mb-3">
+        {% if form.email.errors %}
+        {{form.email(class="form-control is-invalid", id="floatingInputInvalid")}}
+        {{form.email.label(class="floatingInputInvalid")}}
+        <div class="invalid-feedback">
+            {% for error in form.email.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{form.email(class="form-control", id="floatingInput")}}
+        {{form.email.label(class="floatingInput")}}
+        {% endif %}
+    </div>
+    <div class="col-12">
+        <h6>Roles</h6>
+        <div class="form-check">
+            {{form.author(class="form-check-input", id="gridCheck")}}
+            {{form.author.label(class="form-check-label")}}
+        </div>
+        <div class="form-check">
+            {{form.admin(class="form-check-input", id="gridCheck")}}
+            {{form.admin.label(class="form-check-label")}}
+        </div>
+    </div>
+    <div class="d-grid gap-2 col-2 mx-auto">
+    {{form.submit(class="btn btn-primary")}}
+    </div>
+</form>
+{% if user.admin %}
+
+{% else %}
+<hr>
+<span><h3>Delete This User?</h3></span>
+    <hr>
+    <div>
+        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop">Delete</button>
+    </div>
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Delete User?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are You Sure You Want To Delete This User?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <form action="{{url_for('admin.delete_user', username=user.username)}}" method="POST">
+                        <input type="submit" class="btn btn-danger" value="Delete">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "post/layout.html" %}
+{% block body %}
+<h4 class="mb-3"><strong>All Posts by</strong> {{user.username}} <span class="badge bg-dark text-light rounded-pill ">{{posts.total}}</span></h4>
+{% for post in posts.items %}
+<div class="card feed-card shadow-sm border-0 mb-3">
+    <div class="card-body">
+        <div class="clearfix mb-2">
+            <div class="float-left">
+                <small class="font-weight-bold">By <a class="text-primary"
+                        href="{{url_for('post.user_post', username=post.author.username)}}">{{post.author.username}}</a></small>
+                <small>·</small>
+                <small class="text-muted" data-toggle="tooltip" data-placement="bottom">{{moment(post.timestamp).fromNow()}}</small>
+                <small class="text-muted">in</small>
+                <small class="font-weight-bold"><a href="#">Flask</a></small>
+            </div>
+        </div>
+        <div class="mb-1">
+            <a class="text-dark mt-0" href="{{url_for('post.post', post_id=post.id)}}">
+                <h5 class="mt-0 mb-0">{{post.head}}</h5>
+            </a>
+        </div>
+        <p class="text-truncate mb-2" style="font-size: 90%">{{post.sub_head}}</p>
+        <div class="tags mb-0">
+            <div class="blog-tags">
+                <a href="#" class="badge badge-tag" style="border-radius: 2px; color: black;">python</a>
+                <a href="#" class="badge badge-tag" style="border-radius: 2px; color: black;">flask</a>
+                <a href="#" class="badge badge-content-type"
+                    style="border-radius: 2px; color: black;">Article</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+    <nav class="my-4">
+        <ul class="pagination pagination-circle justify-content-center">
+            {% include 'includes/_userpagination.html' %}
+        </ul>
+    </nav>
+{% endblock body %}

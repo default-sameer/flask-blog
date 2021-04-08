@@ -1,0 +1,75 @@
+{% extends "admin/layout.html" %}
+{% block body %}
+{% include 'includes/adminnavbar.html' %}
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="form-floating mb-3">
+        {% if form.username.errors %}
+        {{form.username(class="form-control is-invalid", id="floatingInputInvalid")}}
+        {{form.username.label(class="floatingInputInvalid")}}
+        <div class="invalid-feedback">
+            {% for error in form.username.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{form.username(class="form-control", id="floatingInput")}}
+        {{form.username.label(class="floatingInput")}}
+        {% endif %}
+    </div>
+    <div class="form-floating mb-3">
+        {% if form.email.errors %}
+        {{form.email(class="form-control is-invalid", id="floatingInputInvalid")}}
+        {{form.email.label(class="floatingInputInvalid")}}
+        <div class="invalid-feedback">
+            {% for error in form.email.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{form.email(class="form-control", id="floatingInput")}}
+        {{form.email.label(class="floatingInput")}}
+        {% endif %}
+    </div>
+    <div class="form-floating mb-3">
+        {% if form.password.errors %}
+        {{form.password(class="form-control is-invalid", id="floatingInputInvalid")}}
+        {{form.password.label(class="floatingInputInvalid")}}
+        <div class="invalid-feedback">
+            {% for error in form.password.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{form.password(class="form-control", id="floatingInput")}}
+        {{form.password.label(class="floatingInput")}}
+        {% endif %}
+    </div>
+    <div class="form-floating mb-3">
+        {% if form.confirm_password.errors %}
+        {{form.confirm_password(class="form-control is-invalid", id="floatingInputInvalid")}}
+        {{form.confirm_password.label(class="floatingInputInvalid")}}
+        <div class="invalid-feedback">
+            {% for error in form.confirm_password.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{form.confirm_password(class="form-control", id="floatingInput")}}
+        {{form.confirm_password.label(class="floatingInput")}}
+        {% endif %}
+    </div>
+    <div class="col-12">
+        <h6>Roles</h6>
+        <div class="form-check">
+            {{form.author(class="form-check-input", id="gridCheck")}}
+            {{form.author.label(class="form-check-label")}}
+        </div>
+        <div class="form-check">
+        {{form.admin(class="form-check-input", id="gridCheck")}}
+        {{form.admin.label(class="form-check-label")}}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+{% endblock body %}
